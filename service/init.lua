@@ -15,7 +15,8 @@ uart.on("data", "\n", function(data)
     if data == "quit\r\n" then  
         uart.on("data")
     -- DANGER --
-    
+    elseif data == "hello\r\n" then
+        print("hello")
     elseif data == "dht\r\n" then 
         file.open("dht", "r")
         content = file.read()
@@ -36,12 +37,12 @@ print(cfg.ssid)
 --cfg.hidden = true
 wifi.ap.config(cfg)
 print(wifi.ap.getip())
-wifi.eventmon.register(wifi.eventmon.AP_STACONNECTED, function(T) 
+--wifi.eventmon.register(wifi.eventmon.AP_STACONNECTED, function(T) 
 	--print("connected: mac = " .. T.MAC .. "\taid = " .. T.AID)
-end)
-wifi.eventmon.register(wifi.eventmon.AP_STADISCONNECTED, function(T) 
+--end)
+--wifi.eventmon.register(wifi.eventmon.AP_STADISCONNECTED, function(T) 
     --print("disconnected: mac = " .. T.MAC .. "\taid = " .. T.AID)
-end)
+--end)
 
 if file.exists("service.lua") then 
 	node.compile("service.lua")
